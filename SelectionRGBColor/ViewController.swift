@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet var greenCurrentValue: UILabel!
     @IBOutlet var blueCurrentValue: UILabel!
     
+    @IBOutlet var redInputField: UITextField!
+    @IBOutlet var greenInputField: UITextField!
+    @IBOutlet var blueInputField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +45,16 @@ class ViewController: UIViewController {
         greenCurrentValue.text = String(format: "%.2f", greenSlider.value)
         blueCurrentValue.text = String(format: "%.2f", blueSlider.value)
         
+        redInputField.text = String(format: "%.2f", redSlider.value)
+        greenInputField.text = String(format: "%.2f", greenSlider.value)
+        blueInputField.text = String(format: "%.2f", blueSlider.value)
+        
         colorScreen.backgroundColor = UIColor(
             displayP3Red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
             alpha: 1)
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -55,6 +63,8 @@ class ViewController: UIViewController {
 
     @IBAction func redColorSetting() {
         redCurrentValue.text = String(format: "%.2f", redSlider.value)
+        redInputField.text = String(format: "%.2f", redSlider.value)
+        
         colorScreen.backgroundColor = UIColor(
             displayP3Red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
@@ -64,6 +74,8 @@ class ViewController: UIViewController {
     
     @IBAction func greenColorSetting() {
         greenCurrentValue.text = String(format: "%.2f", greenSlider.value)
+        greenInputField.text = String(format: "%.2f", greenSlider.value)
+        
         colorScreen.backgroundColor = UIColor(
             displayP3Red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
@@ -73,11 +85,17 @@ class ViewController: UIViewController {
     
     @IBAction func blueColorSetting() {
         blueCurrentValue.text = String(format: "%.2f", blueSlider.value)
+        blueInputField.text = String(format: "%.2f", blueSlider.value)
+        
         colorScreen.backgroundColor = UIColor(
             displayP3Red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
             alpha: 1)
+    }
+    
+    @IBAction func enteringRedValue() {
+
     }
     
 }
