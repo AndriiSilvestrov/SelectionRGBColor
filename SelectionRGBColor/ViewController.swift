@@ -26,6 +26,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        redInputField.delegate = self
+        greenInputField.delegate = self
+        blueInputField.delegate = self
+        
         redSlider.value = 0.6
         redSlider.minimumValue = 0
         redSlider.maximumValue = 1
@@ -41,20 +45,13 @@ class ViewController: UIViewController {
         blueSlider.maximumValue = 1
         blueSlider.minimumTrackTintColor = .systemBlue
         
-        redCurrentValue.text = String(format: "%.2f", redSlider.value)
-        greenCurrentValue.text = String(format: "%.2f", greenSlider.value)
-        blueCurrentValue.text = String(format: "%.2f", blueSlider.value)
+        setValueForInputField()
+        setValueForLabel()
+        setColor()
         
-        redInputField.text = String(format: "%.2f", redSlider.value)
-        greenInputField.text = String(format: "%.2f", greenSlider.value)
-        blueInputField.text = String(format: "%.2f", blueSlider.value)
-        
-        colorScreen.backgroundColor = UIColor(
-            displayP3Red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1)
-        
+        addDoneButtonTo(redInputField)
+        addDoneButtonTo(greenInputField)
+        addDoneButtonTo(blueInputField)
     }
     
     override func viewWillLayoutSubviews() {
@@ -62,41 +59,107 @@ class ViewController: UIViewController {
     }
 
     @IBAction func redColorSetting() {
-        redCurrentValue.text = String(format: "%.2f", redSlider.value)
-        redInputField.text = String(format: "%.2f", redSlider.value)
-        
-        colorScreen.backgroundColor = UIColor(
-            displayP3Red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1)
+        setValueForInputField()
+        setValueForLabel()
+        setColor()
     }
     
     @IBAction func greenColorSetting() {
-        greenCurrentValue.text = String(format: "%.2f", greenSlider.value)
-        greenInputField.text = String(format: "%.2f", greenSlider.value)
-        
-        colorScreen.backgroundColor = UIColor(
-            displayP3Red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1)
+        setValueForInputField()
+        setValueForLabel()
+        setColor()
     }
     
     @IBAction func blueColorSetting() {
+        setValueForInputField()
+        setValueForLabel()
+        setColor()
+    }
+    
+    private func setColor() {
+        colorScreen.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                              green: CGFloat(greenSlider.value),
+                                              blue: CGFloat(blueSlider.value),
+                                              alpha: 1)
+    }
+    
+    private func setValueForLabel() {
+        redCurrentValue.text = String(format: "%.2f", redSlider.value)
+        greenCurrentValue.text = String(format: "%.2f", greenSlider.value)
         blueCurrentValue.text = String(format: "%.2f", blueSlider.value)
+    }
+    
+    private func setValueForInputField() {
+        redInputField.text = String(format: "%.2f", redSlider.value)
+        greenInputField.text = String(format: "%.2f", greenSlider.value)
         blueInputField.text = String(format: "%.2f", blueSlider.value)
-        
-        colorScreen.backgroundColor = UIColor(
-            displayP3Red: CGFloat(redSlider.value),
-            green: CGFloat(greenSlider.value),
-            blue: CGFloat(blueSlider.value),
-            alpha: 1)
     }
-    
-    @IBAction func enteringRedValue() {
-
-    }
-    
 }
 
+extension ViewController: UITextFieldDelegate {
+    
+    //Скрываем клавиатуру нажатием на "Done"
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //Скрытие клавиатуры по тапу за пределами Text View
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        view.endEditing(true) //Скрывает клавиатуру, вызваннкю для любого обьекта
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+
+        if let currentValue = Float(text) {
+
+            switch textField.tag {
+            case 0: redSlider.value = currentValue
+            case 1: greenSlider.value = currentValue
+            case 2: blueSlider.value = currentValue
+            default: break
+            }
+            
+            setValueForInputField()
+            setValueForLabel()
+            setColor()
+        } else {
+            showAlert(title: "Wrong format", message: "Please enter correct value")
+        }
+    }
+}
+
+extension ViewController {
+    
+    //Методы для отображения кнопки "Готово" на цыфровой клавиатуре
+    private func addDoneButtonTo(_ textField: UITextField) {
+        
+        let keyboardToolbar = UIToolbar()
+        textField.inputAccessoryView = keyboardToolbar
+        keyboardToolbar.sizeToFit()
+        
+        let dobeButton = UIBarButtonItem(title: "Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(didTapDone))
+        
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        keyboardToolbar.items = [flexBarButton, dobeButton]
+    }
+    
+    @objc private func didTapDone(){
+        view.endEditing(true)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}

@@ -94,7 +94,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9g2-2m-hAd">
+                            <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9g2-2m-hAd">
                                 <rect key="frame" x="109.5" y="265.5" width="182.5" height="31"/>
                                 <connections>
                                     <action selector="greenColorSetting" destination="BYZ-38-t0r" eventType="valueChanged" id="kqH-cP-Pek"/>
@@ -106,7 +106,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="D4p-no-TSy">
+                            <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="D4p-no-TSy">
                                 <rect key="frame" x="109.5" y="312.5" width="182.5" height="31"/>
                                 <connections>
                                     <action selector="blueColorSetting" destination="BYZ-38-t0r" eventType="valueChanged" id="5ve-SO-hWy"/>
@@ -127,26 +127,23 @@
                                     <constraint firstAttribute="width" constant="55" id="jwy-1q-7uB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                <connections>
-                                    <action selector="enteringRedValue" destination="BYZ-38-t0r" eventType="editingDidEnd" id="K57-n0-5uk"/>
-                                </connections>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="FKU-Ko-BvH">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="FKU-Ko-BvH">
                                 <rect key="frame" x="300" y="263.5" width="55" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="gl9-EV-Kzw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-X1-qP5">
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="CMf-X1-qP5">
                                 <rect key="frame" x="300" y="310.5" width="55" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="IIE-uS-Sou"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -189,14 +186,14 @@
                     </view>
                     <connections>
                         <outlet property="blueCurrentValue" destination="sjt-SS-M1X" id="Okd-am-Gdm"/>
-                        <outlet property="blueInputField" destination="CMf-X1-qP5" id="rFt-cY-sMv"/>
+                        <outlet property="blueInputField" destination="CMf-X1-qP5" id="IAu-79-JvU"/>
                         <outlet property="blueSlider" destination="D4p-no-TSy" id="xeF-rM-ddz"/>
                         <outlet property="colorScreen" destination="9eQ-Sd-CU8" id="A9l-co-yFC"/>
                         <outlet property="greenCurrentValue" destination="Php-l0-mxC" id="aBx-Pm-9VE"/>
-                        <outlet property="greenInputField" destination="FKU-Ko-BvH" id="YGm-ct-lMh"/>
+                        <outlet property="greenInputField" destination="FKU-Ko-BvH" id="sYJ-n7-fJj"/>
                         <outlet property="greenSlider" destination="9g2-2m-hAd" id="2lb-S7-kkn"/>
                         <outlet property="redCurrentValue" destination="CG3-4i-dLh" id="B1d-El-BSU"/>
-                        <outlet property="redInputField" destination="m8U-ay-hvy" id="Jmh-Dl-os3"/>
+                        <outlet property="redInputField" destination="m8U-ay-hvy" id="s6F-Bs-x7D"/>
                         <outlet property="redSlider" destination="ifP-eT-sdk" id="rUk-YF-fwh"/>
                     </connections>
                 </viewController>
